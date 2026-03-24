@@ -23,7 +23,7 @@ contract SimpleWalletTest is Test {
         vm.deal(address(wallet), 1 ether);
 
         vm.prank(owner);
-        wallet.sendEth(user, 0.1 ether, "0x");
+        wallet.execute(user, 0.1 ether, "0x");
         assertEq(user.balance, 0.1 ether);
     }
 }
