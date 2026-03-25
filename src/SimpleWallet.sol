@@ -19,18 +19,18 @@ contract SimpleWallet {
 
         require(owner == signer, "You are not the owner");
 
-        nonce++;
+        nonce ++;
+
         return true;
     }
 
-    function execute(address to, uint256 _value, bytes calldata data) external {
-        require(msg.sender == address(this), "Only contract can call");
+    function execute(address _to, uint256 _value, bytes calldata data) external {
+        require(msg.sender == address(this), "Only contract can execute");
 
-        (bool success, ) = to.call{value : _value}(data);
+        (bool success, ) = _to.call{value : _value}(data);
         require(success, "Tx failed");
     }
 
     receive() external payable{}
-
     fallback() external payable{}
 }
