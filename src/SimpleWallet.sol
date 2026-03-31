@@ -31,9 +31,10 @@ contract SimpleWallet {
     }
 
     function execute(address _to, uint256 _value, bytes calldata _data) external onlyEntryPoint {
-        require(msg.sender == address(this), "Only self call is allowed");
-
         (bool success, ) = _to.call{value: _value}(_data);
         require(success, "Transaction failed");
     }
+
+    receive() external payable{}
+    fallback() external payable{}
 }
