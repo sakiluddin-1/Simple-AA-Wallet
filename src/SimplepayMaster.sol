@@ -1,0 +1,31 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.19;
+
+import "@account-abstraction/contracts/interfaces/IPaymaster.sol";
+import "@account-abstraction/contracts/interfaces/IEntryPoint.sol";
+import "@account-abstraction/contracts/core/BasePaymaster.sol";
+
+contract SimplePaymaster is BasePaymaster {
+    
+    constructor(IEntryPoint _entryPoint) BasePaymaster(_entryPoint) {}
+
+    function _validatePaymasterUserOp(
+        UserOperation calldata userOp,
+        bytes32 userOpHash,
+        uint256 maxCost
+    )
+        internal
+        override
+        returns (bytes memory context, uint256 validationData)
+    {
+        return ("", 0);
+    }
+
+    function _postOp(
+        PostOpMode mode,
+        bytes calldata context,
+        uint256 actualGasCost
+    ) internal override {}
+
+    receive() external payable {}
+}
